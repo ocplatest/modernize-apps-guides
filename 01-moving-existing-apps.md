@@ -612,6 +612,8 @@ export JBOSS_HOME=$HOME/jboss-eap-7.2 ; mvn wildfly:start wildfly:add-resource w
 
 Wait for a `BUILD SUCCESS` message. If it fails, check that you made all the correct changes and try again!
 
+Ignore and click the X icon in the upper right corner to dismiss popups about processes listening on various ports - we will use a separate browser tab to access these.
+
 > NOTE: The reason we are using `wildfly:start` and `wildfly:shutdown` is because the `add-resource` command requires a running server. After we have added these resource we don't have to run this command again.
 
 ## Deploying the application
@@ -629,9 +631,20 @@ Wait for the server to startup. You should see `Deployed "ROOT.war" (runtime-nam
 Open another CodeReady Workspaces Terminal Window. From the new Terminal window, access the application by running the below command:
 
 ```
-curl http://localhost:8080
+curl -I http://localhost:8080
 ```
+Verify that you are getting "200 OK"
 
+```
+HTTP/1.1 200 OK
+Connection: keep-alive
+X-Powered-By: JSP/2.3
+Set-Cookie: JSESSIONID=28R05ZBmNAkB3cKddlCYx4n3-WuIatuJoB0blvmX.workspacez0fxl8tznc0wxwyc; path=/
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 2311
+Date: Wed, 21 Oct 2020 01:37:57 GMT
+
+```
 ## Shutdown the application
 
 Before moving on, in the Terminal window from which you started JBoss EAP, type `CTRL-C` to stop and terminate the process. 
@@ -682,9 +695,7 @@ Login using:
 * Username: provide the openshift cluster username from the lab details page.
 * Password: provide the openshift cluster password from the lab details page.
 
-You will see the OpenShift landing page:
-
-<kbd>![](images/moving-existing-apps/createproject.jpg)</kbd>
+You will see the OpenShift landing page. 
 
 Click **Create Project**, fill in the fields, and click **Create** (make sure to replace XX with your assigned number):
 
